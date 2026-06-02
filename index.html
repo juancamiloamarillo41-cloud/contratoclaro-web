@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ContratoClaro — Entiende cualquier contrato en lenguaje simple</title>
+  <meta name="description" content="ContratoClaro analiza tus contratos con inteligencia artificial: resumen claro, nivel de riesgo, cláusulas a vigilar y recordatorios de vencimientos.">
+  <style>
+    :root {
+      --blue: #1E5BC6;
+      --green: #0D9F6E;
+      --ink: #1A1F36;
+      --muted: #6B7280;
+      --bg: #ffffff;
+      --card: #f7f9fc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --ink: #e8ebf2; --muted: #9aa3b2; --bg: #0f1115; --card: #171a21; }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+    header.hero {
+      background: linear-gradient(160deg, #E8F2F6 0%, #F8FAFC 60%, var(--bg) 100%);
+      padding: 64px 0 56px;
+      text-align: center;
+    }
+    @media (prefers-color-scheme: dark) {
+      header.hero { background: linear-gradient(160deg, #13202b 0%, #0f1115 70%); }
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 1.3rem; color: var(--blue);
+      margin-bottom: 24px;
+    }
+    .logo .dot { width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--green)); }
+    h1 { font-size: 2.3rem; line-height: 1.2; margin: 0 0 14px; color: var(--ink); }
+    h1 .accent { color: var(--blue); }
+    .sub { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin: 0 auto 28px; }
+    .badge {
+      display: inline-block; padding: 10px 22px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      color: #fff; font-weight: 700; font-size: .95rem;
+    }
+    section { padding: 48px 0; }
+    h2 { font-size: 1.5rem; text-align: center; margin: 0 0 32px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card { background: var(--card); border-radius: 16px; padding: 22px; }
+    .card .ico { font-size: 1.6rem; }
+    .card h3 { margin: 10px 0 6px; font-size: 1.1rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .96rem; }
+    .note {
+      text-align: center; color: var(--muted); font-size: .92rem;
+      background: var(--card); border-radius: 14px; padding: 16px 18px; max-width: 640px; margin: 0 auto;
+    }
+    footer { border-top: 1px solid #8882; padding: 32px 0 48px; text-align: center; color: var(--muted); font-size: .9rem; }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .links { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="logo"><span class="dot"></span> ContratoClaro</div>
+      <h1>Entiende cualquier contrato <span class="accent">en lenguaje simple</span></h1>
+      <p class="sub">
+        ContratoClaro usa inteligencia artificial para explicarte tu contrato: un resumen claro,
+        el nivel de riesgo, las cláusulas que debes vigilar y recordatorios de las fechas importantes.
+      </p>
+      <span class="badge">Próximamente en Google Play</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2>Qué puedes hacer</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="ico">🧠</div>
+          <h3>Análisis con IA</h3>
+          <p>Pega o escanea tu contrato y recibe un resumen con los puntos clave en segundos.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🚦</div>
+          <h3>Nivel de riesgo</h3>
+          <p>Sabe de un vistazo si el contrato luce justo o si conviene revisarlo con cuidado.</p>
+        </div>
+        <div class="card">
+          <div class="ico">⚠️</div>
+          <h3>Cláusulas a vigilar</h3>
+          <p>Te señalamos las cláusulas que podrían perjudicarte y por qué.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🔔</div>
+          <h3>Recordatorios</h3>
+          <p>No olvides vencimientos ni fechas clave: la app te avisa a tiempo.</p>
+        </div>
+        <div class="card">
+          <div class="ico">💬</div>
+          <h3>Chat con IA <small>(Premium)</small></h3>
+          <p>Resuelve tus dudas sobre plazos, multas y cláusulas de ese contrato.</p>
+        </div>
+        <div class="card">
+          <div class="ico">📲</div>
+          <h3>Comparte fácil</h3>
+          <p>Envía el resumen, las fechas y los riesgos por WhatsApp en un toque.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <p class="note">
+        ContratoClaro te ayuda a entender tus documentos, pero <strong>no reemplaza la asesoría
+        de un abogado</strong>. Para decisiones importantes, consulta a un profesional.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links">
+        <a href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/">Política de Privacidad</a>
+        <a href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/eliminar-cuenta.html">Eliminar mi cuenta</a>
+        <a href="mailto:juancamiloamarillo41@gmail.com">Contacto</a>
+      </div>
+      <div>© 2026 ContratoClaro · Desarrollado por Juan Camilo Amarillo Morales</div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,142 +1,317 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ContratoClaro — Entiende cualquier contrato en lenguaje simple</title>
-  <meta name="description" content="ContratoClaro analiza tus contratos con inteligencia artificial: resumen claro, nivel de riesgo, cláusulas a vigilar y recordatorios de vencimientos.">
-  <style>
-    :root {
-      --blue: #1E5BC6;
-      --green: #0D9F6E;
-      --ink: #1A1F36;
-      --muted: #6B7280;
-      --bg: #ffffff;
-      --card: #f7f9fc;
+  <meta name="theme-color" content="#f2f8fb">
+  <meta name="description" content="ContratoClaro explica contratos en lenguaje simple, identifica cláusulas que requieren atención y organiza las fechas importantes de tus documentos.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-web/">
+  <link rel="icon" type="image/png" href="assets/contratoclaro-logo.png">
+  <link rel="preload" href="assets/inter-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/app-dashboard.png" as="image" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="ContratoClaro | Entiende lo que firmas">
+  <meta property="og:description" content="Escanea, comprende y revisa tus contratos en lenguaje claro.">
+  <meta property="og:url" content="https://juancamiloamarillo41-cloud.github.io/contratoclaro-web/">
+  <meta property="og:image" content="https://juancamiloamarillo41-cloud.github.io/contratoclaro-web/assets/app-dashboard.png">
+  <meta property="og:image:alt" content="Pantalla principal de la aplicación ContratoClaro">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>ContratoClaro | Entiende lo que firmas</title>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "ContratoClaro",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Android",
+      "description": "Aplicación para comprender contratos en lenguaje simple, identificar riesgos y organizar fechas importantes.",
+      "url": "https://juancamiloamarillo41-cloud.github.io/contratoclaro-web/",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.contratoclaro",
+      "inLanguage": "es-CO"
     }
-    @media (prefers-color-scheme: dark) {
-      :root { --ink: #e8ebf2; --muted: #9aa3b2; --bg: #0f1115; --card: #171a21; }
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.6;
-    }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
-    header.hero {
-      background: linear-gradient(160deg, #E8F2F6 0%, #F8FAFC 60%, var(--bg) 100%);
-      padding: 64px 0 56px;
-      text-align: center;
-    }
-    @media (prefers-color-scheme: dark) {
-      header.hero { background: linear-gradient(160deg, #13202b 0%, #0f1115 70%); }
-    }
-    .logo {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-weight: 800; font-size: 1.3rem; color: var(--blue);
-      margin-bottom: 24px;
-    }
-    .logo .dot { width: 34px; height: 34px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--blue), var(--green)); }
-    h1 { font-size: 2.3rem; line-height: 1.2; margin: 0 0 14px; color: var(--ink); }
-    h1 .accent { color: var(--blue); }
-    .sub { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin: 0 auto 28px; }
-    .badge {
-      display: inline-block; padding: 10px 22px; border-radius: 999px;
-      background: linear-gradient(135deg, var(--blue), var(--green));
-      color: #fff; font-weight: 700; font-size: .95rem;
-    }
-    section { padding: 48px 0; }
-    h2 { font-size: 1.5rem; text-align: center; margin: 0 0 32px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-    .card { background: var(--card); border-radius: 16px; padding: 22px; }
-    .card .ico { font-size: 1.6rem; }
-    .card h3 { margin: 10px 0 6px; font-size: 1.1rem; }
-    .card p { margin: 0; color: var(--muted); font-size: .96rem; }
-    .note {
-      text-align: center; color: var(--muted); font-size: .92rem;
-      background: var(--card); border-radius: 14px; padding: 16px 18px; max-width: 640px; margin: 0 auto;
-    }
-    footer { border-top: 1px solid #8882; padding: 32px 0 48px; text-align: center; color: var(--muted); font-size: .9rem; }
-    footer a { color: var(--blue); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .links { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-bottom: 16px; }
-  </style>
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-  <header class="hero">
-    <div class="wrap">
-      <div class="logo"><span class="dot"></span> ContratoClaro</div>
-      <h1>Entiende cualquier contrato <span class="accent">en lenguaje simple</span></h1>
-      <p class="sub">
-        ContratoClaro usa inteligencia artificial para explicarte tu contrato: un resumen claro,
-        el nivel de riesgo, las cláusulas que debes vigilar y recordatorios de las fechas importantes.
-      </p>
-      <a class="badge" style="text-decoration:none;" href="https://play.google.com/store/apps/details?id=com.contratoclaro">Disponible en Google Play</a>
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="#inicio" aria-label="ContratoClaro, inicio">
+        <img src="assets/contratoclaro-logo.png" width="42" height="42" alt="">
+        <span>ContratoClaro</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-links" id="nav-links" aria-label="Navegación principal" data-nav-links>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#analisis">El análisis</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#privacidad">Privacidad</a>
+        <a class="button button--small" href="https://play.google.com/store/apps/details?id=com.contratoclaro" target="_blank" rel="noopener noreferrer">Probar la app</a>
+      </nav>
     </div>
   </header>
 
-  <section>
-    <div class="wrap">
-      <h2>Qué puedes hacer</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="ico">🧠</div>
-          <h3>Análisis con IA</h3>
-          <p>Pega o escanea tu contrato y recibe un resumen con los puntos clave en segundos.</p>
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__scene" aria-hidden="true">
+        <div class="contract-sheet">
+          <span class="contract-sheet__label">CONTRATO</span>
+          <span class="contract-sheet__line contract-sheet__line--long"></span>
+          <span class="contract-sheet__line"></span>
+          <span class="contract-sheet__line contract-sheet__line--short"></span>
+          <span class="contract-sheet__mark">Cláusula por revisar</span>
         </div>
-        <div class="card">
-          <div class="ico">🚦</div>
-          <h3>Nivel de riesgo</h3>
-          <p>Sabe de un vistazo si el contrato luce justo o si conviene revisarlo con cuidado.</p>
+        <div class="phone phone--hero">
+          <div class="phone__speaker"></div>
+          <img src="assets/app-dashboard.png" width="888" height="1998" alt="" fetchpriority="high">
         </div>
-        <div class="card">
-          <div class="ico">⚠️</div>
-          <h3>Cláusulas a vigilar</h3>
-          <p>Te señalamos las cláusulas que podrían perjudicarte y por qué.</p>
+        <div class="scene-note scene-note--risk">
+          <span>Lectura clara</span>
+          <strong>Riesgos identificados</strong>
         </div>
-        <div class="card">
-          <div class="ico">🔔</div>
-          <h3>Recordatorios</h3>
-          <p>No olvides vencimientos ni fechas clave: la app te avisa a tiempo.</p>
-        </div>
-        <div class="card">
-          <div class="ico">💬</div>
-          <h3>Chat con IA <small>(Premium)</small></h3>
-          <p>Resuelve tus dudas sobre plazos, multas y cláusulas de ese contrato.</p>
-        </div>
-        <div class="card">
-          <div class="ico">📄</div>
-          <h3>Informe en PDF</h3>
-          <p>Genera un informe en PDF de tu análisis y compártelo con quien quieras.</p>
+        <div class="scene-note scene-note--library">
+          <strong>24</strong>
+          <span>guías verificadas</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section style="padding-top:0;">
-    <div class="wrap">
-      <p class="note">
-        ContratoClaro te ayuda a entender tus documentos, pero <strong>no reemplaza la asesoría
-        de un abogado</strong>. Para decisiones importantes, consulta a un profesional.
-      </p>
-    </div>
-  </section>
+      <div class="hero__content">
+        <p class="eyebrow">Análisis de contratos para Colombia</p>
+        <h1 id="hero-title">
+          <span class="hero__product">ContratoClaro</span>
+          <span class="hero__promise">Entiende lo que firmas.</span>
+        </h1>
+        <p class="hero__lead">Convierte documentos legales difíciles en resúmenes comprensibles, alertas de riesgo y próximos pasos concretos.</p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="https://play.google.com/store/apps/details?id=com.contratoclaro" target="_blank" rel="noopener noreferrer">
+            Descargar en Google Play
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="text-link" href="#como-funciona">Ver cómo funciona <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero__assurance">Escanea o sube un PDF. Recibe una lectura inicial en lenguaje simple.</p>
+      </div>
+    </section>
 
-  <footer>
-    <div class="wrap">
-      <div class="links">
-        <a href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/">Política de Privacidad</a>
-        <a href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/eliminar-cuenta.html">Eliminar mi cuenta</a>
+    <div class="signal-bar" aria-label="Proceso de ContratoClaro">
+      <div class="signal-bar__inner">
+        <p><strong>01</strong><span>Captura el documento</span></p>
+        <span aria-hidden="true"></span>
+        <p><strong>02</strong><span>Revisa los hallazgos</span></p>
+        <span aria-hidden="true"></span>
+        <p><strong>03</strong><span>Decide con más contexto</span></p>
+      </div>
+    </div>
+
+    <section class="section workflow" id="como-funciona" aria-labelledby="workflow-title">
+      <div class="shell workflow__grid">
+        <div class="workflow__copy" data-reveal>
+          <p class="eyebrow">Del documento a lo importante</p>
+          <h2 id="workflow-title">Una revisión simple, sin perder el contexto.</h2>
+          <p class="section-intro">ContratoClaro organiza la lectura para que puedas concentrarte en obligaciones, penalidades, plazos y condiciones que merecen atención.</p>
+
+          <ol class="steps">
+            <li>
+              <span>1</span>
+              <div>
+                <h3>Escanea, sube o pega</h3>
+                <p>Usa la cámara, selecciona un PDF o agrega el texto directamente.</p>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <h3>Indica tu posición</h3>
+                <p>Selecciona el tipo de contrato y tu rol para orientar mejor la lectura.</p>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <h3>Explora el resultado</h3>
+                <p>Consulta el resumen, los hallazgos y las referencias relacionadas.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="product-shot" data-reveal>
+          <div class="product-shot__caption">
+            <span>Pantalla real</span>
+            <strong>Captura flexible</strong>
+          </div>
+          <div class="phone phone--scan">
+            <div class="phone__speaker"></div>
+            <img src="assets/app-scan.png" width="888" height="1998" loading="lazy" alt="Pantalla de ContratoClaro para escanear un documento, subir un PDF o pegar texto">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section analysis" id="analisis" aria-labelledby="analysis-title">
+      <div class="shell">
+        <div class="section-heading section-heading--split" data-reveal>
+          <div>
+            <p class="eyebrow">Una respuesta que se puede leer</p>
+            <h2 id="analysis-title">Lo esencial aparece primero.</h2>
+          </div>
+          <p>El resultado separa el nivel de riesgo, los hallazgos principales y una explicación en lenguaje claro para evitar que todo termine en un bloque de texto interminable.</p>
+        </div>
+
+        <div class="analysis-board" data-reveal aria-label="Ejemplo ilustrativo de un resultado de ContratoClaro">
+          <div class="analysis-board__topline">
+            <div>
+              <span class="kicker">Ejemplo de resultado</span>
+              <h3>Contrato de arrendamiento</h3>
+            </div>
+            <span class="risk-badge"><i></i> Riesgo medio</span>
+          </div>
+
+          <div class="analysis-board__grid">
+            <div class="analysis-summary">
+              <span class="analysis-label">Resumen ejecutivo</span>
+              <p>El contrato define el canon y la duración, pero incluye una penalidad de terminación anticipada que conviene revisar antes de aceptar.</p>
+              <div class="risk-scale" aria-label="Escala de riesgo: medio">
+                <span class="risk-scale__low"></span>
+                <span class="risk-scale__medium"></span>
+                <span class="risk-scale__high"></span>
+              </div>
+              <small>Bajo <b>Medio</b> Alto</small>
+            </div>
+
+            <div class="finding">
+              <span class="finding__number">01</span>
+              <div>
+                <span class="analysis-label">Hallazgo principal</span>
+                <h4>Penalidad por terminación anticipada</h4>
+                <p>Compara el valor de la penalidad con la duración restante y solicita claridad sobre las excepciones.</p>
+              </div>
+            </div>
+
+            <div class="finding finding--green">
+              <span class="finding__number">02</span>
+              <div>
+                <span class="analysis-label">Próximo paso</span>
+                <h4>Confirma fechas y condiciones</h4>
+                <p>Verifica la fecha de renovación y el plazo requerido para avisar una terminación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section capabilities" id="funciones" aria-labelledby="capabilities-title">
+      <div class="shell capabilities__grid">
+        <div class="capabilities__heading" data-reveal>
+          <p class="eyebrow">Más allá del resumen</p>
+          <h2 id="capabilities-title">Herramientas para seguir después de la primera lectura.</h2>
+          <p>Consulta, organiza y conserva lo importante dentro de un mismo flujo.</p>
+        </div>
+
+        <div class="feature-ledger" data-reveal>
+          <article>
+            <span>01</span>
+            <div>
+              <h3>Preguntas sobre el contrato</h3>
+              <p>Consulta cláusulas, plazos, multas y obligaciones a partir del documento analizado.</p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <h3>Biblioteca de cláusulas</h3>
+              <p>Accede a 24 guías verificadas sobre cláusulas frecuentes, incluso sin usar IA.</p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <h3>Agenda y recordatorios</h3>
+              <p>Organiza vencimientos y fechas relevantes para no depender de la memoria.</p>
+            </div>
+          </article>
+          <article>
+            <span>04</span>
+            <div>
+              <h3>Historial e informe PDF</h3>
+              <p>Conserva tus análisis y genera un informe para revisarlo o compartirlo.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust" id="privacidad" aria-labelledby="trust-title">
+      <div class="shell trust__grid">
+        <div class="trust__statement" data-reveal>
+          <p class="eyebrow">Privacidad explicada de frente</p>
+          <h2 id="trust-title">Tu documento merece un tratamiento responsable.</h2>
+        </div>
+        <div class="trust__details" data-reveal>
+          <p>Antes de analizar, ContratoClaro informa cómo se procesa el texto y qué información permanece en el dispositivo. Los datos locales se separan por usuario y se almacenan cifrados.</p>
+          <a class="text-link" href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/" target="_blank" rel="noopener noreferrer">Leer la política de privacidad <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="legal-context" aria-labelledby="legal-context-title">
+      <div class="shell legal-context__grid">
+        <div class="legal-context__mark" aria-hidden="true">CO</div>
+        <div data-reveal>
+          <p class="eyebrow">Pensado para Colombia</p>
+          <h2 id="legal-context-title">Contexto local, lenguaje cotidiano.</h2>
+        </div>
+        <p data-reveal>La experiencia está orientada a documentos legales utilizados en Colombia y puede relacionar hallazgos con referencias de su biblioteca jurídica. Las citas deben verificarse antes de tomar decisiones.</p>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="cta-title">
+      <div class="shell final-cta__inner" data-reveal>
+        <img src="assets/contratoclaro-logo.png" width="84" height="84" alt="">
+        <div>
+          <p class="eyebrow">Tu próxima firma puede ser más clara</p>
+          <h2 id="cta-title">Lee el contrato. Detecta lo importante. Decide mejor.</h2>
+        </div>
+        <a class="button button--light" href="https://play.google.com/store/apps/details?id=com.contratoclaro" target="_blank" rel="noopener noreferrer">Abrir Google Play <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell site-footer__top">
+      <a class="brand brand--footer" href="#inicio" aria-label="ContratoClaro, volver al inicio">
+        <img src="assets/contratoclaro-logo.png" width="38" height="38" alt="">
+        <span>ContratoClaro</span>
+      </a>
+      <p>Comprende mejor tus documentos legales.</p>
+      <nav aria-label="Enlaces legales">
+        <a href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/" target="_blank" rel="noopener noreferrer">Privacidad</a>
+        <a href="https://juancamiloamarillo41-cloud.github.io/contratoclaro-privacy/eliminar-cuenta.html" target="_blank" rel="noopener noreferrer">Eliminar cuenta</a>
         <a href="mailto:juancamiloamarillo41@gmail.com">Contacto</a>
-      </div>
-      <div>© 2026 ContratoClaro · Desarrollado por Juan Camilo Amarillo Morales</div>
+      </nav>
+    </div>
+    <div class="shell site-footer__bottom">
+      <span>© <span data-year>2026</span> ContratoClaro</span>
+      <span>Desarrollado por Juan Camilo Amarillo Morales</span>
+    </div>
+    <div class="shell legal-note">
+      ContratoClaro facilita la comprensión inicial de documentos y no reemplaza la asesoría de un abogado. Verifica las referencias y consulta a un profesional para decisiones importantes.
     </div>
   </footer>
 
+  <script src="script.js" defer></script>
 </body>
 </html>

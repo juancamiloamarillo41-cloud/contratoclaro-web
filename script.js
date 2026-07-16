@@ -1,5 +1,9 @@
 document.documentElement.classList.add("js");
 
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => document.body.classList.add("page-ready"));
+});
+
 const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const navLinks = document.querySelector("[data-nav-links]");

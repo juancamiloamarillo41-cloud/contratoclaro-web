@@ -414,13 +414,67 @@ select {
   transform: translateX(-50%);
 }
 
+.phone__scan-line {
+  position: absolute;
+  top: 15%;
+  left: 6%;
+  z-index: 2;
+  width: 88%;
+  height: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 16px rgba(0, 167, 199, 0.8);
+  opacity: 0;
+  animation: scan-line 4.8s ease-in-out infinite;
+}
+
 .phone--hero {
+  --scene-opacity: 1;
   position: absolute;
   top: 40px;
   right: max(3vw, calc((100vw - 1210px) / 2));
   width: 335px;
   aspect-ratio: 888 / 1998;
   transform: rotate(1.6deg);
+  opacity: var(--scene-opacity);
+}
+
+.js .phone--hero,
+.js .contract-sheet,
+.js .scene-note {
+  opacity: 0;
+  translate: 0 28px;
+}
+
+.js .phone--hero,
+.js .contract-sheet {
+  transition: opacity 700ms ease, translate 700ms ease;
+}
+
+.js .scene-note {
+  transition: opacity 520ms ease, translate 520ms ease;
+}
+
+.js body.page-ready .phone--hero {
+  opacity: var(--scene-opacity);
+  translate: 0 0;
+}
+
+.js body.page-ready .contract-sheet,
+.js body.page-ready .scene-note {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.js body.page-ready .contract-sheet {
+  transition-delay: 90ms;
+}
+
+.js body.page-ready .scene-note--risk {
+  transition-delay: 320ms;
+}
+
+.js body.page-ready .scene-note--library {
+  transition-delay: 440ms;
 }
 
 .contract-sheet {
@@ -890,17 +944,17 @@ select {
 }
 
 .trust {
-  padding: 96px 0;
+  padding: 112px 0 96px;
   scroll-margin-top: 74px;
   color: var(--paper);
   background: #172127;
 }
 
-.trust__grid {
+.trust__header {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: 110px;
-  align-items: center;
+  gap: 100px;
+  align-items: end;
 }
 
 .trust .eyebrow {
@@ -908,16 +962,16 @@ select {
 }
 
 .trust h2 {
-  max-width: 650px;
+  max-width: 690px;
   color: var(--paper);
 }
 
-.trust__details {
+.trust__intro {
   padding-left: 36px;
   border-left: 1px solid #3b4b54;
 }
 
-.trust__details p {
+.trust__intro p {
   margin: 0 0 24px;
   color: #c9d4da;
   font-size: 17px;
@@ -926,6 +980,83 @@ select {
 
 .trust .text-link {
   color: #82d9b1;
+}
+
+.privacy-principles {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid #3b4b54;
+  border-bottom: 1px solid #3b4b54;
+}
+
+.privacy-principles article {
+  min-width: 0;
+  padding: 36px 32px 38px;
+}
+
+.privacy-principles article + article {
+  border-left: 1px solid #3b4b54;
+}
+
+.privacy-principles__number {
+  color: #82d9b1;
+  font-size: 12px;
+  font-weight: 820;
+}
+
+.privacy-principles__label {
+  margin: 34px 0 8px;
+  color: #82d9b1 !important;
+  font-size: 10px !important;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.privacy-principles h3 {
+  margin: 0;
+  color: var(--paper);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.privacy-principles article > p:last-child {
+  margin: 16px 0 0;
+  color: #adbac2;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.trust__footer {
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.trust__footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 720;
+}
+
+.trust__footer i {
+  width: 9px;
+  height: 9px;
+  background: #65c69a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(101, 198, 154, 0.12);
+}
+
+.trust__footer p {
+  margin: 0;
+  color: #88979f;
+  font-size: 12px;
+  text-align: right;
 }
 
 .legal-context {
@@ -1062,6 +1193,58 @@ select {
   transform: translateY(0);
 }
 
+.js .analysis-board__grid > div,
+.js .feature-ledger article,
+.js .privacy-principles article {
+  opacity: 0;
+  translate: 0 14px;
+  transition: opacity 440ms ease, translate 440ms ease;
+}
+
+.js .analysis-board.is-visible .analysis-board__grid > div,
+.js .feature-ledger.is-visible article,
+.js .privacy-principles.is-visible article {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.js .analysis-board.is-visible .analysis-board__grid > div:nth-child(2),
+.js .feature-ledger.is-visible article:nth-child(2),
+.js .privacy-principles.is-visible article:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.js .analysis-board.is-visible .analysis-board__grid > div:nth-child(3),
+.js .feature-ledger.is-visible article:nth-child(3),
+.js .privacy-principles.is-visible article:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.js .feature-ledger.is-visible article:nth-child(4) {
+  transition-delay: 270ms;
+}
+
+@keyframes scan-line {
+  0%, 12% {
+    top: 15%;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  72% {
+    top: 78%;
+    opacity: 0.9;
+  }
+
+  82%, 100% {
+    top: 78%;
+    opacity: 0;
+  }
+}
+
 @media (max-width: 1120px) {
   .nav-links {
     gap: 20px;
@@ -1187,11 +1370,11 @@ select {
   }
 
   .phone--hero {
+    --scene-opacity: 0.34;
     top: auto;
     right: -42px;
     bottom: -310px;
     width: 330px;
-    opacity: 0.34;
     transform: rotate(5deg);
   }
 
@@ -1216,7 +1399,7 @@ select {
 
   .workflow__grid,
   .capabilities__grid,
-  .trust__grid,
+  .trust__header,
   .section-heading--split {
     grid-template-columns: 1fr;
   }
@@ -1271,12 +1454,22 @@ select {
     scroll-margin-top: 66px;
   }
 
-  .trust__grid {
+  .trust__header {
     gap: 42px;
   }
 
-  .trust__details {
+  .trust__intro {
     padding: 28px 0 0;
+    border-top: 1px solid #3b4b54;
+    border-left: 0;
+  }
+
+  .privacy-principles {
+    grid-template-columns: 1fr;
+    margin-top: 52px;
+  }
+
+  .privacy-principles article + article {
     border-top: 1px solid #3b4b54;
     border-left: 0;
   }
@@ -1382,10 +1575,10 @@ select {
   }
 
   .phone--hero {
+    --scene-opacity: 0.25;
     right: -62px;
     bottom: -305px;
     width: 285px;
-    opacity: 0.25;
   }
 
   .signal-bar {
@@ -1439,7 +1632,7 @@ select {
   .section-intro,
   .section-heading--split > p,
   .capabilities__heading > p:last-child,
-  .trust__details p {
+  .trust__intro p {
     font-size: 16px;
   }
 
@@ -1493,6 +1686,20 @@ select {
 
   .trust {
     padding: 68px 0;
+  }
+
+  .privacy-principles article {
+    padding: 28px 0 30px;
+  }
+
+  .trust__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .trust__footer p {
+    text-align: left;
   }
 
   .legal-context {
@@ -1644,5 +1851,23 @@ select {
   .js [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+
+  .js .phone--hero {
+    opacity: var(--scene-opacity);
+    translate: 0 0;
+  }
+
+  .js .contract-sheet,
+  .js .scene-note,
+  .js .analysis-board__grid > div,
+  .js .feature-ledger article,
+  .js .privacy-principles article {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .phone__scan-line {
+    display: none;
   }
 }
